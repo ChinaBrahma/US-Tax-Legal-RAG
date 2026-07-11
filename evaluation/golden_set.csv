@@ -1,0 +1,11 @@
+query,ground_truth,source_document
+What is Section 179?,Section 179 allows businesses to deduct the cost of qualifying property,p946.pdf
+What is depreciation?,Depreciation is the recovery of the cost of business property over time,p946.pdf
+What is Form W-4?,Form W-4 is used by employees to determine federal income tax withholding,fw4.pdf
+What is Publication 463?,Publication 463 explains travel gift and car expenses,p463.pdf
+What is Form W-9?,Form W-9 provides taxpayer identification information,fw9.pdf
+What is Publication 17?,Publication 17 is the federal income tax guide for individuals,p17.pdf
+What is Publication 946?,Publication 946 explains depreciation and amortization,p946.pdf
+What is IRS Form 4562?,Form 4562 reports depreciation and amortization,f4562.pdf
+What is Publication 527?,Publication 527 explains residential rental property,p527.pdf
+What is Publication 550?,Publication 550 explains investment income and expenses,p550.pdf

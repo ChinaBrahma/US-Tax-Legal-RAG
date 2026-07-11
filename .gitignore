@@ -1,0 +1,31 @@
+# Virtual Environment
+.venv/
+
+# Generated Files
+vector_db/
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Logs
+*.log
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+
+# Chroma Temp Files
+*.sqlite3-shm
+*.sqlite3-wal
