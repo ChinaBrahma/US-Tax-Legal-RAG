@@ -1,6 +1,12 @@
 import streamlit as st
-from langchain_ollama import ChatOllama
+import os
+
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+
 from retriever.hybrid_retriever import hybrid_search
+
+load_dotenv()
 
 # ----------------------------
 # Streamlit Config
@@ -17,9 +23,10 @@ st.write("Ask questions about US Tax & Legal documents using Hybrid Search.")
 # ----------------------------
 # Load LLM
 # ----------------------------
-llm = ChatOllama(
-    model="llama3.2:latest",
-    temperature=0
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0,
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 # ----------------------------
@@ -39,6 +46,11 @@ if st.button("Search"):
     with st.spinner("Searching documents..."):
 
         docs = hybrid_search(question)
+
+        if len(docs) == 0:
+            st.subheader("📌 Answer")
+            st.write("Information not found in the provided documents.")
+            st.stop()
 
     context = ""
     citations = []

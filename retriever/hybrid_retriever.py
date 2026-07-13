@@ -1,7 +1,10 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from elasticsearch import Elasticsearch
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # ----------------------------------------------------
 # Load Embedding Model
 # ----------------------------------------------------
@@ -23,7 +26,10 @@ vector_db = Chroma(
 # Connect Elasticsearch
 # ----------------------------------------------------
 
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch(
+    cloud_id=os.getenv("ELASTIC_CLOUD_ID"),
+    api_key=os.getenv("ELASTIC_API_KEY")
+)
 
 INDEX_NAME = "legal_documents"
 

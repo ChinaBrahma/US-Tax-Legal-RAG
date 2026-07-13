@@ -1,8 +1,8 @@
 # ⚖️ US Tax & Legal RAG System
 
-A Hybrid Retrieval-Augmented Generation (RAG) system for answering questions from US Tax & Legal documents using **ChromaDB**, **Elasticsearch**, **Ollama**, and **Streamlit**.
+A Hybrid Retrieval-Augmented Generation (RAG) system for answering questions from US Tax & Legal documents using ChromaDB, Elasticsearch Cloud, Groq LLM, and Streamlit.
 
-The system combines semantic retrieval with keyword-based search to provide accurate answers along with document-level citations. All inference is performed locally using **Llama 3.2** through **Ollama**, ensuring privacy and eliminating dependency on external APIs.
+The system combines semantic retrieval with keyword-based search to provide accurate answers along with document-level citations. Elasticsearch Cloud is used for keyword retrieval, while Groq (Llama 3.3 70B) is used for answer generation.
 
 ---
 
@@ -15,35 +15,34 @@ This project addresses these limitations by implementing a **Hybrid Retrieval-Au
 - Semantic Search using ChromaDB
 - Keyword Search using Elasticsearch
 - Query Expansion
-- Local LLM Inference using Ollama
+- Cloud-based LLM Inference using Groq
 
 The retrieved documents are passed to the LLM, which generates responses strictly based on the retrieved context while also providing document citations and page references.
 
 ---
 # Project Highlights
 
-- Hybrid Retrieval using ChromaDB and Elasticsearch
+- Hybrid Retrieval using ChromaDB and Elasticsearch Cloud
 - Query Expansion for IRS Forms and Publications
-- Local LLM inference using Llama 3.2 through Ollama
+- LLM inference using Groq (Llama 3.3 70B)
 - Streamlit-based web interface
 - Document-level source citations
 - 100% Retrieval Accuracy on the Golden Set
-- Fully local deployment without external APIs
-
+- Cloud-based deployment using Elastic Cloud and Groq API
 ---
 # Key Features
 
 - Hybrid Retrieval (Vector Search + Keyword Search)
 - ChromaDB Vector Database
-- Elasticsearch Keyword Search
+- Elasticsearch Cloud Keyword Search
 - Query Expansion for IRS Forms and Publications
-- Local LLM (Llama 3.2 using Ollama)
+- Groq LLM (Llama 3.3 70B)
 - Streamlit-based User Interface
 - Source Citations with Document Name and Page Number
 - Golden Set Evaluation
 - Retrieval Accuracy Evaluation
 - Semantic Faithfulness Evaluation
-- Fully Local Deployment
+- Cloud-based Deployment
 - Modular Project Structure
 
 ---
@@ -70,7 +69,7 @@ The retrieved documents are passed to the LLM, which generates responses strictl
                                  │
                 ┌────────────────┴────────────────┐
                 ▼                                 ▼
-      Embedding Generation               Elasticsearch
+      Embedding Generation         Elasticsearch cloud
  (BAAI/bge-small-en-v1.5)                Keyword Index
                 │                                 │
                 ▼                                 ▼
@@ -85,7 +84,7 @@ The retrieved documents are passed to the LLM, which generates responses strictl
                      Context Construction
                                │
                                ▼
-                  Llama 3.2 (Ollama Local LLM)
+                     Groq (Llama 3.3 70B)
                                │
                                ▼
              Answer Generation with Citations
@@ -123,7 +122,7 @@ Each document passes through the following stages:
 5. Metadata Extraction
 6. Embedding Generation
 7. ChromaDB Indexing
-8. Elasticsearch Indexing
+8. Elasticsearch Cloud Indexing
 
 ---
 
@@ -132,27 +131,24 @@ Each document passes through the following stages:
 | Category | Technology |
 |----------|------------|
 | Programming Language | Python |
-| LLM | Llama 3.2 (Ollama) |
+| LLM | Groq (Llama 3.3 70B) |
 | Embedding Model | BAAI/bge-small-en-v1.5 |
 | Vector Database | ChromaDB |
-| Search Engine | Elasticsearch |
+| Search Engine | Elasticsearch Cloud |
 | PDF Parser | PyMuPDF |
 | UI | Streamlit |
 | Evaluation | Sentence Transformers |
-| Containerization | Docker |
+| Deployment | Streamlit Community Cloud |
 | Version Control | Git & GitHub |
 
 ---
 
 # Project Structure
 
-```
 US-Tax-Legal-RAG/
 │
 ├── architecture/
 │   └── architecture_diagram.png
-│
-├── config/
 │
 ├── dataset/
 │
@@ -172,9 +168,9 @@ US-Tax-Legal-RAG/
 ├── llm/
 │   └── legal_assistant.py
 │
-├── output/
-│   ├── chunks.json
-│   └── legal_documents.json
+├── output/                  # Generated after parsing (ignored by Git)
+│   ├── legal_documents.json
+│   └── chunks.json
 │
 ├── parser/
 │   └── pdf_parser.py
@@ -186,13 +182,14 @@ US-Tax-Legal-RAG/
 │   ├── hybrid_retriever.py
 │   └── retriever.py
 │
-├── vector_db/
+├── vector_db/               # Generated after indexing (ignored by Git)
 │
 ├── app.py
 ├── docker-compose.yml
 ├── requirements.txt
+├── .env.example
+├── .gitignore
 └── README.md
-
 
 ---
 
@@ -203,8 +200,9 @@ US-Tax-Legal-RAG/
 Before running the project, make sure the following software is installed:
 
 - Python 3.11 or later
-- Docker Desktop
-- Ollama
+- Internet Connection
+- Elastic Cloud Account
+- Groq API Key
 - Git
 - Visual Studio Code (Recommended)
 
@@ -253,51 +251,47 @@ source .venv/bin/activate
 
 ## Step 4: Install Required Packages
 
+Install all required Python dependencies.
+
 ```bash
 pip install -r requirements.txt
 ```
 
----
+If you're using **GitHub Codespaces**, make sure Python **3.11** is selected before installing the dependencies.
 
-## Step 5: Start Elasticsearch
-
-Ensure Docker Desktop is running.
-
-Start Elasticsearch using Docker Compose.
+You can verify your Python version using:
 
 ```bash
-docker compose up -d
+python3 --version
 ```
 
-Verify Elasticsearch is running.
+Expected output:
 
-```bash
-curl http://localhost:9200
-```
-
-If Elasticsearch is running successfully, you should see the cluster information in the terminal.
-
----
-
-## Step 6: Download the Ollama Model
-
-Pull the Llama 3.2 model.
-
-```bash
-ollama pull llama3.2
-```
-
-Verify the installed models.
-
-```bash
-ollama list
+```text
+Python 3.11.x
 ```
 
 ---
 
-## Step 7: Parse PDF Documents
+---
+## Step 5: Configure Environment Variables
 
-Extract text and metadata from all legal PDF documents.
+Create a `.env` file in the project root.
+
+```env
+ELASTIC_CLOUD_ID=YOUR_ELASTIC_CLOUD_ID
+ELASTIC_API_KEY=YOUR_ELASTIC_API_KEY
+GROQ_API_KEY=YOUR_GROQ_API_KEY
+```
+
+> **Note:** The `.env` file is excluded from version control. Use the provided `.env.example` file as a reference.
+
+---
+
+
+## Step 6: Parse PDF Documents
+
+Extract text and metadata from all US Tax & Legal PDF documents.
 
 ```bash
 python parser/pdf_parser.py
@@ -311,9 +305,9 @@ output/legal_documents.json
 
 ---
 
-## Step 8: Create Text Chunks
+## Step 7: Create Text Chunks
 
-Split parsed documents into overlapping chunks.
+Split parsed documents into chunks with metadata.
 
 ```bash
 python preprocessing/chunking.py
@@ -327,7 +321,7 @@ output/chunks.json
 
 ---
 
-## Step 9: Create the ChromaDB Vector Database
+## Step 8: Create the ChromaDB Vector Database
 
 Generate embeddings and create the vector database.
 
@@ -343,60 +337,67 @@ vector_db/
 
 ---
 
-## Step 10: Index Documents into Elasticsearch
+## Step 9: Index Documents into Elasticsearch Cloud
 
-Create the keyword index.
+Upload all parsed documents into Elasticsearch Cloud.
 
 ```bash
 python elasticsearch/index_documents.py
 ```
 
+> **Note:** Before running this script, configure the following variables inside your `.env` file:
+
+```env
+ELASTIC_CLOUD_ID=YOUR_ELASTIC_CLOUD_ID
+ELASTIC_API_KEY=YOUR_ELASTIC_API_KEY
+```
+
 ---
 
-## Step 11: Test Hybrid Retrieval
+## Step 10: Test Hybrid Retrieval
 
-Run the hybrid retrieval module.
+Run the Hybrid Retriever.
 
 ```bash
 python retriever/hybrid_retriever.py
 ```
 
-Example query:
+Example Query:
 
 ```
 What is Section 179?
 ```
 
-Expected output:
+Expected Output:
 
-- Vector Search Results
+- Semantic Search Results
 - Keyword Search Results
 - Hybrid Search Results
 
 ---
 
-## Step 12: Run the Legal Assistant
+## Step 11: Run the Legal Assistant
 
-```bash
-python llm/legal_assistant.py
-```
+The project uses **Groq (Llama 3.3 70B)** as the Large Language Model.
 
-Example question:
+Example Query:
 
 ```
 What is Section 179?
 ```
 
-Example response:
+Expected Response:
 
 ```
-Answer:
-Section 179 allows businesses to immediately deduct the cost of qualifying business property subject to IRS limits and eligibility requirements.
+Answer
 
-Summary:
-Section 179 provides an immediate deduction for qualifying business assets instead of depreciating them over several years.
+Section 179 allows businesses to immediately deduct the cost of qualifying business property instead of depreciating it over multiple years, subject to IRS rules and limitations.
 
-Source Citations:
+Summary
+
+Section 179 provides an immediate tax deduction for eligible business assets.
+
+Source Citations
 
 Document: p946.pdf
 Page: 16
@@ -407,12 +408,12 @@ Page: 2
 
 ---
 
-## Step 13: Launch the Streamlit Application
+## Step 12: Launch the Streamlit Application
 
-Start the web interface.
+Run:
 
 ```bash
-streamlit run app.py
+streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false
 ```
 
 Open your browser.
@@ -421,12 +422,12 @@ Open your browser.
 http://localhost:8501
 ```
 
-Users can now:
+You can now:
 
-- Ask legal questions
+- Ask legal and tax related questions
 - Retrieve relevant legal documents
-- View generated answers
-- View source citations
+- Generate context-aware answers
+- View document citations
 - Explore Hybrid Retrieval results
 
 ---
@@ -445,8 +446,6 @@ Run:
 python evaluation/evaluate.py
 ```
 
-This script evaluates whether the Hybrid Retrieval pipeline retrieves the expected legal document for each query in the Golden Set.
-
 Output:
 
 - Total Questions
@@ -464,8 +463,6 @@ Run:
 python evaluation/faithfulness.py
 ```
 
-This script compares generated answers with reference answers using semantic similarity.
-
 Output:
 
 - Faithful Answers
@@ -473,214 +470,113 @@ Output:
 - Not Faithful
 - Overall Faithfulness Score
 
----
-
 # Expected Project Workflow
 
 ```
 Dataset
-    │
-    ▼
-PDF Parser
-    │
-    ▼
+      │
+      ▼
+PDF Parser (PyMuPDF)
+      │
+      ▼
 legal_documents.json
-    │
-    ▼
+      │
+      ▼
 Chunking
-    │
-    ▼
+      │
+      ▼
 chunks.json
-    │
-    ├──────────────┐
-    ▼              ▼
-Vector Store   Elasticsearch
-    │              │
-    ▼              ▼
-ChromaDB     Keyword Index
-      \        /
-       \      /
-        ▼    ▼
-   Hybrid Retrieval
-          │
-          ▼
- Legal Assistant
-          │
-          ▼
-     Streamlit UI
+      │
+      ├──────────────┐
+      ▼              ▼
+Vector Store   Elasticsearch Cloud
+      │              │
+      ▼              ▼
+ ChromaDB     Keyword Search
+        \          /
+         \        /
+          ▼      ▼
+      Hybrid Retrieval
+             │
+             ▼
+      Groq (Llama 3.3)
+             │
+             ▼
+        Streamlit UI
 ```
 
 ---
 
 # Hybrid Retrieval Pipeline
 
-The system uses a Hybrid Retrieval strategy that combines semantic search with keyword-based search to improve retrieval accuracy.
+The system combines **semantic search** with **keyword search** for improved retrieval accuracy.
 
-## Vector Search
+## Semantic Search
 
 Semantic retrieval is performed using:
 
 - ChromaDB
 - BAAI/bge-small-en-v1.5 Embeddings
 
-This helps retrieve documents that are semantically similar to the user's query, even when exact keywords are not present.
+This retrieves documents that are semantically related even if exact keywords are absent.
 
 ---
 
 ## Keyword Search
 
-Keyword retrieval is implemented using Elasticsearch.
+Keyword retrieval is performed using **Elasticsearch Cloud**.
 
-The indexed fields include:
+Indexed Fields:
 
-- Document Name
+- Document
 - Category
 - Content
+- Page Number
 
-Elasticsearch is particularly effective for retrieving IRS Forms, Publication numbers, and exact legal terminology.
+This is particularly useful for IRS Forms, Publications and legal terminology.
 
 ---
 
 ## Query Expansion
 
-To improve retrieval quality, the system expands commonly used legal queries.
+Common legal queries are automatically expanded.
 
-Examples include:
+Examples:
 
 | User Query | Expanded Query |
 |------------|----------------|
-| Form W-4 | IRS Form W-4 Employee's Withholding Certificate |
+| Form W-4 | IRS Form W-4 Employee Withholding Certificate |
 | Form W-9 | IRS Form W-9 Request for Taxpayer Identification Number |
 | Form 4562 | IRS Form 4562 Depreciation and Amortization |
-| Publication 463 | IRS Publication 463 Travel, Gift and Car Expenses |
+| Publication 463 | IRS Publication 463 Travel Gift and Car Expenses |
 | Publication 527 | IRS Publication 527 Residential Rental Property |
 | Publication 550 | IRS Publication 550 Investment Income and Expenses |
-| Publication 946 | IRS Publication 946 How To Depreciate Property |
+| Publication 946 | IRS Publication 946 Depreciation |
 | Section 179 | IRS Section 179 Deduction |
 
-Query Expansion significantly improves retrieval for IRS publications and forms.
-
----
-
-# Evaluation Results
-
-The system was evaluated using a manually created Golden Set consisting of representative legal questions.
-
-## Retrieval Accuracy
-
-| Metric | Result |
-|---------|--------|
-| Total Questions | **10** |
-| Correct Retrievals | **10** |
-| Incorrect Retrievals | **0** |
-| Retrieval Accuracy | **100%** |
-
-The Hybrid Retrieval pipeline successfully retrieved the expected source document for every query in the Golden Set.
-
----
-
-## Semantic Faithfulness
-
-Semantic similarity between generated answers and reference answers was evaluated using Sentence Transformers.
-
-Embedding Model:
-
-```
-all-MiniLM-L6-v2
-```
-
-Results:
-
-| Metric | Result |
-|---------|--------|
-| Faithful Answers | **5** |
-| Needs Review | **4** |
-| Not Faithful | **1** |
-| Semantic Faithfulness | **50%** |
-
----
-
-# Sample Query
-
-## User Question
-
-```
-What is Section 179?
-```
-
----
-
-## Generated Answer
-
-```
-Answer
-
-Section 179 allows businesses to immediately deduct the cost of qualifying business property instead of depreciating the cost over several years, subject to IRS limits and eligibility requirements.
-
-Summary
-
-Section 179 provides an upfront deduction for qualifying business assets, reducing taxable income for eligible businesses.
-
-Source Citations
-
-Document: p946.pdf
-Page: 16
-
-Document: p463.pdf
-Page: 2
-```
+Query Expansion improves retrieval quality for IRS forms and publications.
 
 ---
 
 # Future Improvements
 
-The following enhancements can further improve the system:
-
-- Cross-Encoder Re-ranking
+- Cross Encoder Re-ranking
 - Reciprocal Rank Fusion (RRF)
 - Graph RAG
 - Metadata-aware Retrieval
-- Larger Embedding Models
+- Better Embedding Models
 - Incremental Indexing
 - REST API using FastAPI
 - LLM-as-a-Judge Evaluation
 - User Authentication
 - Conversation Memory
-- Multi-turn Legal Question Answering
+- Multi-turn Question Answering
 
 ---
 
 # Troubleshooting
 
-## Elasticsearch is not running
-
-Start Docker Desktop and execute:
-
-```bash
-docker compose up -d
-```
-
-Verify:
-
-```bash
-curl http://localhost:9200
-```
-
----
-
-## Ollama model not found
-
-Download the model:
-
-```bash
-ollama pull llama3.2
-```
-
----
-
-## ChromaDB not found
-
-Recreate the vector database:
+## ChromaDB Missing
 
 ```bash
 python indexing/vector_store.py
@@ -688,19 +584,34 @@ python indexing/vector_store.py
 
 ---
 
-## Elasticsearch index missing
+## Elasticsearch Cloud Connection Error
 
-Run:
+Verify:
 
-```bash
-python elasticsearch/index_documents.py
+```text
+ELASTIC_CLOUD_ID
+ELASTIC_API_KEY
 ```
+
+inside your `.env` file.
+
+---
+
+## Groq API Error
+
+Verify:
+
+```text
+GROQ_API_KEY
+```
+
+inside your `.env` file.
 
 ---
 
 ## ModuleNotFoundError
 
-Install the required dependencies again:
+Run:
 
 ```bash
 pip install -r requirements.txt
@@ -715,10 +626,10 @@ pip install -r requirements.txt
 | PDF Parsing | ✅ |
 | Chunking | ✅ |
 | ChromaDB | ✅ |
-| Elasticsearch | ✅ |
+| Elasticsearch Cloud | ✅ |
 | Hybrid Retrieval | ✅ |
 | Query Expansion | ✅ |
-| Llama 3.2 | ✅ |
+| Groq LLM | ✅ |
 | Streamlit UI | ✅ |
 | Source Citations | ✅ |
 | Golden Set Evaluation | ✅ |
@@ -736,26 +647,49 @@ National Institute of Technology (NIT) Jamshedpur
 
 GitHub: https://github.com/100rabh-creator
 
-
 ---
 
 # Acknowledgements
 
-This project was developed to demonstrate the practical implementation of a Hybrid Retrieval-Augmented Generation (RAG) system for the US Tax & Legal domain. It integrates semantic retrieval, keyword search, and local large language model inference to provide accurate and explainable legal question answering.This project was implemented as part of an AI Product Engineering assignment to demonstrate the practical application of Hybrid Retrieval-Augmented Generation (RAG) techniques for legal document question answering.
+This project demonstrates a Hybrid Retrieval-Augmented Generation (Hybrid RAG) system for US Tax & Legal question answering.
 
-The implementation makes use of the following open-source technologies:
+Technologies used:
 
 - Python
 - LangChain
 - ChromaDB
-- Elasticsearch
-- Ollama
+- Elasticsearch Cloud
+- Groq
 - Streamlit
 - Hugging Face Transformers
 - Sentence Transformers
 - PyMuPDF
 
----
+# Deployment
+
+The application is designed for deployment on **Streamlit Community Cloud**.
+
+## Required Deployment Secrets
+
+Configure the following secrets in your Streamlit Cloud application:
+
+```env
+ELASTIC_CLOUD_ID=YOUR_ELASTIC_CLOUD_ID
+ELASTIC_API_KEY=YOUR_ELASTIC_API_KEY
+GROQ_API_KEY=YOUR_GROQ_API_KEY
+```
+
+### Deployment Architecture
+
+The deployed application uses:
+
+- **Elasticsearch Cloud** for keyword-based retrieval
+- **ChromaDB** for semantic vector search
+- **Groq (Llama 3.3 70B)** for answer generation
+- **Streamlit Community Cloud** for the web interface
+
+> **Note:** Never commit your `.env` file or API keys to GitHub. Use `.env.example` as a template for local development.
+
 ---
 
-⭐ If you found this project useful, feel free to explore, extend, or build upon it for learning purposes.
+⭐ Feel free to explore, extend, or build upon this project for learning and research purposes.
