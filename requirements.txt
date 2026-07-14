@@ -105,6 +105,7 @@ pydantic-settings==2.14.2
 pydantic_core==2.46.4
 pydeck==0.9.3
 Pygments==2.20.0
+pymupdf==1.28.0
 PyPika==0.51.1
 pyproject_hooks==1.2.0
 python-dateutil==2.9.0.post0
@@ -135,6 +136,7 @@ threadpoolctl==3.6.0
 tokenizers==0.22.2
 toml==0.10.2
 torch==2.13.0
+torchvision==0.28.0
 tqdm==4.68.4
 transformers==5.13.1
 triton==3.7.1
