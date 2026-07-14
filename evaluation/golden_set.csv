@@ -1,11 +1,101 @@
-query,ground_truth,source_document
-What is Section 179?,Section 179 allows businesses to deduct the cost of qualifying property,p946.pdf
-What is depreciation?,Depreciation is the recovery of the cost of business property over time,p946.pdf
-What is Form W-4?,Form W-4 is used by employees to determine federal income tax withholding,fw4.pdf
-What is Publication 463?,Publication 463 explains travel gift and car expenses,p463.pdf
-What is Form W-9?,Form W-9 provides taxpayer identification information,fw9.pdf
-What is Publication 17?,Publication 17 is the federal income tax guide for individuals,p17.pdf
-What is Publication 946?,Publication 946 explains depreciation and amortization,p946.pdf
-What is IRS Form 4562?,Form 4562 reports depreciation and amortization,f4562.pdf
-What is Publication 527?,Publication 527 explains residential rental property,p527.pdf
-What is Publication 550?,Publication 550 explains investment income and expenses,p550.pdf
+query,expected_answer,source_document
+What is Publication 17?,Publication 17 provides general federal income tax guidance for individual taxpayers.,p17.pdf
+Who should use Publication 17?,Publication 17 is intended for individual taxpayers filing federal income tax returns.,p17.pdf
+What information is available in Publication 17?,Publication 17 explains federal income tax rules for individuals.,p17.pdf
+What is Publication 225?,Publication 225 provides tax guidance for farmers.,p225.pdf
+Who should use Publication 225?,Publication 225 is intended for individuals engaged in farming activities.,p225.pdf
+What is Publication 334?,Publication 334 explains tax responsibilities for small businesses.,p334.pdf
+Who should use Publication 334?,Publication 334 is designed for small business owners.,p334.pdf
+What is Publication 463?,Publication 463 explains travel, gift, and car expenses.,p463.pdf
+What expenses are covered in Publication 463?,Publication 463 discusses travel, gift, and vehicle-related business expenses.,p463.pdf
+Who should refer to Publication 463?,Taxpayers claiming travel or vehicle expense deductions should refer to Publication 463.,p463.pdf
+What is Publication 527?,Publication 527 explains residential rental property taxation.,p527.pdf
+What topics are covered in Publication 527?,Publication 527 explains rental income, expenses, and depreciation.,p527.pdf
+What is Publication 529?,Publication 529 explains miscellaneous deductions.,p529.pdf
+What is Publication 530?,Publication 530 provides tax information for homeowners.,p530.pdf
+What is Publication 541?,Publication 541 explains partnership taxation.,p541.pdf
+Who should use Publication 541?,Publication 541 is intended for partnerships and partners.,p541.pdf
+What is Publication 544?,Publication 544 explains sales and other dispositions of assets.,p544.pdf
+What does Publication 544 cover?,Publication 544 discusses gains and losses from selling property.,p544.pdf
+What is Publication 550?,Publication 550 explains investment income and investment expenses.,p550.pdf
+Who should read Publication 550?,Taxpayers earning investment income should refer to Publication 550.,p550.pdf
+What is Publication 554?,Publication 554 provides tax information for older adults.,p554.pdf
+What is Publication 559?,Publication 559 explains tax issues related to surviving spouses and estates.,p559.pdf
+What is Publication 560?,Publication 560 explains retirement plans for self-employed individuals.,p560.pdf
+What is Publication 583?,Publication 583 provides information about starting a business and recordkeeping.,p583.pdf
+What is Publication 590-A?,Publication 590-A explains contributions to Individual Retirement Arrangements (IRAs).,p590a.pdf
+What is Form W-4?,Form W-4 is used by employees to determine federal income tax withholding.,fw4.pdf
+Who should fill out Form W-4?,Employees complete Form W-4 so employers can calculate tax withholding.,fw4.pdf
+Why is Form W-4 important?,Form W-4 helps employers determine the correct amount of federal income tax to withhold.,fw4.pdf
+What is Form W-9?,Form W-9 is used to provide a taxpayer identification number.,fw9.pdf
+Who should complete Form W-9?,Independent contractors and other payees provide Form W-9 to requesters.,fw9.pdf
+Why is Form W-9 used?,Form W-9 provides taxpayer identification information for tax reporting.,fw9.pdf
+What is Form 4562?,Form 4562 is used to claim depreciation and amortization.,f4562.pdf
+When is Form 4562 required?,Form 4562 is filed when claiming depreciation or amortization deductions.,f4562.pdf
+What expenses are reported on Form 4562?,Depreciation and amortization expenses are reported on Form 4562.,f4562.pdf
+What is Form 2555?,Form 2555 is used to claim the foreign earned income exclusion.,f2555.pdf
+Who should use Form 2555?,Individuals with foreign earned income may use Form 2555.,f2555.pdf
+What is the purpose of Form 2555?,Form 2555 helps eligible taxpayers exclude certain foreign earned income.,f2555.pdf
+What is Form 4797?,Form 4797 reports sales of business property.,f4797.pdf
+When is Form 4797 filed?,Form 4797 is filed when reporting gains or losses from business property.,f4797.pdf
+What is reported on Form 4797?,Sales and dispositions of business property are reported on Form 4797.,f4797.pdf
+What is Form 6251?,Form 6251 is used to calculate the Alternative Minimum Tax (AMT).,f6251.pdf
+Who files Form 6251?,Taxpayers subject to Alternative Minimum Tax file Form 6251.,f6251.pdf
+What is Form 8829?,Form 8829 is used to claim business use of a home deductions.,f8829.pdf
+Who can use Form 8829?,Self-employed individuals claiming home office expenses may use Form 8829.,f8829.pdf
+What is Form 8863?,Form 8863 is used to claim education tax credits.,f8863.pdf
+What credits are claimed on Form 8863?,Education-related tax credits are claimed on Form 8863.,f8863.pdf
+What is Form 8949?,Form 8949 reports sales and other dispositions of capital assets.,f8949.pdf
+When should Form 8949 be filed?,Form 8949 is used when reporting capital asset transactions.,f8949.pdf
+What is Form 8995?,Form 8995 is used to calculate the Qualified Business Income deduction.,f8995.pdf
+Who should use Form 8995?,Eligible taxpayers claiming the Qualified Business Income deduction use Form 8995.,f8995.pdf
+What is the purpose of the Internal Revenue Bulletin?,The Internal Revenue Bulletin publishes official IRS guidance and announcements.,irb26-19.pdf
+What information is published in the Internal Revenue Bulletin?,The Internal Revenue Bulletin contains IRS rulings, notices, revenue procedures, and announcements.,irb26-20.pdf
+Why is the Internal Revenue Bulletin important?,It serves as the official publication for IRS administrative guidance.,irb26-21.pdf
+What types of guidance are included in the Internal Revenue Bulletin?,Revenue rulings, revenue procedures, notices, and announcements are included.,irb26-22.pdf
+Who publishes the Internal Revenue Bulletin?,The Internal Revenue Service publishes the Internal Revenue Bulletin.,irb26-23.pdf
+How frequently is the Internal Revenue Bulletin released?,The Internal Revenue Bulletin is generally released on a weekly basis.,irb26-24.pdf
+What is the purpose of Revenue Rulings?,Revenue Rulings explain the IRS interpretation of tax laws.,irb26-25.pdf
+What is a Revenue Procedure?,A Revenue Procedure explains official IRS administrative procedures.,irb26-26.pdf
+What is an IRS Notice?,An IRS Notice communicates guidance or important tax information.,irb26-27.pdf
+What is an IRS Announcement?,An IRS Announcement provides official public information from the IRS.,irb26-28.pdf
+What are Treasury Regulations?,Treasury Regulations provide official interpretations of the Internal Revenue Code.,CFR-2024-title26-vol1.pdf
+Who issues Treasury Regulations?,Treasury Regulations are issued by the U.S. Department of the Treasury.,CFR-2024-title26-vol1.pdf
+Why are Treasury Regulations important?,They explain how federal tax laws should be applied.,CFR-2024-title26-vol2.pdf
+What is contained in Title 26 of the CFR?,Title 26 contains U.S. federal tax regulations.,CFR-2024-title26-vol2.pdf
+What do Treasury Regulations explain?,Treasury Regulations provide detailed guidance for implementing tax laws.,CFR-2024-title26-vol3.pdf
+How are Treasury Regulations used?,They assist taxpayers and professionals in interpreting tax provisions.,CFR-2024-title26-vol3.pdf
+What is the purpose of Deloitte Tax News and Views?,It provides updates and analysis on tax developments.,us-tax-taxnewsandviews-260605.pdf
+What information is included in Tax News and Views?,Tax News and Views discusses recent tax policy and regulatory updates.,us-tax-taxnewsandviews-260612.pdf
+What is Deloitte World Tax Advisor?,It provides international tax news and professional insights.,dtt-tax-worldtaxadvisor-20260612.pdf
+What topics are covered in World Tax Advisor?,International tax developments and policy changes are discussed.,dtt-tax-worldtaxadvisor-20260619.pdf
+What is State Tax Matters?,State Tax Matters provides updates on U.S. state tax developments.,us-tax-statetaxmatters-06122026.pdf
+What information is included in State Tax Matters?,It summarizes significant state tax legislative and judicial developments.,us-tax-statetaxmatters-06192026.pdf
+What is the IRS Newsletter?,The IRS Newsletter provides taxpayer news, reminders, and updates.,irs-newsletter-may-2025.pdf
+What information is available in the IRS Newsletter?,The IRS Newsletter shares important tax announcements and filing information.,irs-newsletter-august-2025.pdf
+Why should taxpayers read the IRS Newsletter?,It helps taxpayers stay informed about current IRS guidance and updates.,irs-newsletter-november-2025.pdf
+What is the purpose of a tax court judgement?,Tax court judgements resolve disputes related to federal tax laws.,65de4450-893f-4adc-a71c-5dca876555e7.pdf
+Why are court judgements important in tax law?,Court judgements help interpret and apply tax laws in real cases.,aac646d1-caf0-4f53-89da-aedf878142b7.pdf
+What role do court judgements play in taxation?,They establish legal precedents for resolving tax disputes.,9b6c696c-c1ec-4980-ab22-249cde98bd13.pdf
+How are tax disputes resolved in court?,Tax disputes are resolved based on applicable tax laws and judicial interpretation.,55d02981-73eb-4311-95e3-1c943a17a6f3.pdf
+What information can be found in tax court judgements?,Tax court judgements contain legal reasoning, facts, and final decisions.,eee0cc02-a038-4065-b7c9-ccb6c9faf075.pdf
+What is the purpose of legal precedent in tax cases?,Legal precedent helps ensure consistent interpretation of tax laws.,9d0723dd-0be4-49e7-a4dc-3c6dd79dbcf7.pdf
+How do judges interpret tax regulations?,Judges interpret regulations based on statutory language and previous decisions.,37ca8b87-c04a-4e1e-8e43-3f4b7af30404.pdf
+Why are judicial decisions important for taxpayers?,Judicial decisions clarify how tax laws are applied.,2adeca4f-5765-4ee1-a93b-b678726983dd.pdf
+What is the purpose of tax litigation?,Tax litigation resolves disagreements between taxpayers and tax authorities.,246cd745-b5ec-4a36-b521-d31348363e73.pdf
+How do courts resolve tax disputes?,Courts evaluate evidence, tax laws, and legal arguments before issuing decisions.,b1311b71-8dcb-440c-85cf-5e9c1e41e8ce.pdf
+What is depreciation?,Depreciation allows taxpayers to recover the cost of qualifying business property over time.,p946.pdf
+What is Section 179?,Section 179 allows businesses to immediately deduct the cost of qualifying business property subject to IRS limits.,p946.pdf
+What is a capital asset?,A capital asset generally includes property held for investment or personal purposes.,p544.pdf
+What is investment income?,Investment income includes earnings from interest, dividends, and capital gains.,p550.pdf
+What is residential rental property?,Residential rental property is real estate rented to tenants for residential purposes.,p527.pdf
+What is business recordkeeping?,Businesses should maintain accurate financial records for tax reporting purposes.,p583.pdf
+What is a partnership for tax purposes?,A partnership is a business entity whose income passes through to its partners.,p541.pdf
+What is a home office deduction?,Eligible taxpayers may deduct certain expenses related to business use of their home.,f8829.pdf
+What is foreign earned income?,Foreign earned income generally refers to income earned while working in a foreign country.,f2555.pdf
+What is the Qualified Business Income deduction?,The Qualified Business Income deduction allows eligible taxpayers to deduct a portion of qualified business income.,f8995.pdf
+What are education tax credits?,Education tax credits help reduce taxes for qualified education expenses.,f8863.pdf
+What is Alternative Minimum Tax?,Alternative Minimum Tax ensures certain taxpayers pay at least a minimum amount of tax.,f6251.pdf
+What is the purpose of Form 8949?,Form 8949 reports sales and other dispositions of capital assets.,f8949.pdf
+What is the purpose of Form 4797?,Form 4797 reports gains and losses from the sale of business property.,f4797.pdf
+What is Publication 590-B?,Publication 590-B explains distributions from Individual Retirement Arrangements (IRAs).,p590b.pdf

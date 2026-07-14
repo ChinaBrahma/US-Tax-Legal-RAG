@@ -3,6 +3,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from elasticsearch import Elasticsearch
 import streamlit as st
 
+load_dotenv()
 # ----------------------------------------------------
 # Load Embedding Model
 # ----------------------------------------------------

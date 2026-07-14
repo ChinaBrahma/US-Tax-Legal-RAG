@@ -1,4 +1,7 @@
 import json
+import os
+
+from dotenv import load_dotenv
 from elasticsearch import Elasticsearch, helpers
 import streamlit as st
 
@@ -14,8 +17,12 @@ es = Elasticsearch(
 )
 
 
-INDEX_NAME = "legal_documents"
+es = Elasticsearch(
+    cloud_id=os.getenv("ELASTIC_CLOUD_ID"),
+    api_key=os.getenv("ELASTIC_API_KEY"),
+)
 
+INDEX_NAME = "legal_documents"
 # ----------------------------
 # Delete old index (if exists)
 # ----------------------------
@@ -55,8 +62,7 @@ print("✅ Index created.")
 # ----------------------------
 # Load chunks.json
 # ----------------------------
-with open("output/chunks.json", "r", encoding="utf-8") as f:
-    chunks = json.load(f)
+with open("output/legal_documents.json", "r", encoding="utf-8") as f:    chunks = json.load(f)
 
 print(f"📄 Loaded {len(chunks)} chunks.")
 
@@ -73,8 +79,7 @@ for chunk in chunks:
             "document": chunk["document"],
             "category": chunk["category"],
             "page": chunk["page"],
-            "chunk_id": chunk["chunk_id"],
-            "content": chunk["text"]   # <-- IMPORTANT
+"chunk_id": f'{chunk["document"]}_{chunk["page"]}',            "content": chunk["text"]   # <-- IMPORTANT
         }
     }
 
