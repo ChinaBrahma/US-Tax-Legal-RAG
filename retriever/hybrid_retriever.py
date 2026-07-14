@@ -1,6 +1,7 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from elasticsearch import Elasticsearch
+import streamlit as st
 
 # ----------------------------------------------------
 # Load Embedding Model
@@ -23,7 +24,12 @@ vector_db = Chroma(
 # Connect Elasticsearch
 # ----------------------------------------------------
 
-es = Elasticsearch("http://localhost:9200")
+# es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch(
+    cloud_id=st.secrets["elastic"]["cloud_id"],
+    api_key=st.secrets["elastic"]["api_key"]
+)
+
 
 INDEX_NAME = "legal_documents"
 

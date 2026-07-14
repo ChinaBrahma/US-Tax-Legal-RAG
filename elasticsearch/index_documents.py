@@ -1,10 +1,18 @@
 import json
 from elasticsearch import Elasticsearch, helpers
+import streamlit as st
 
 # ----------------------------
 # Connect to Elasticsearch
 # ----------------------------
-es = Elasticsearch("http://localhost:9200")
+
+# es = Elasticsearch("http://localhost:9200")
+
+es = Elasticsearch(
+    cloud_id=st.secrets["elastic"]["cloud_id"],
+    api_key=st.secrets["elastic"]["api_key"]
+)
+
 
 INDEX_NAME = "legal_documents"
 

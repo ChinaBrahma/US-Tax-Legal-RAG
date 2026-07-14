@@ -17,8 +17,16 @@ st.write("Ask questions about US Tax & Legal documents using Hybrid Search.")
 # ----------------------------
 # Load LLM
 # ----------------------------
-llm = ChatOllama(
-    model="llama3.2:latest",
+# llm = ChatOllama(
+#     model="llama3.2:latest",
+#     temperature=0
+# )
+
+from langchain_groq import ChatGroq
+llm = ChatGroq(
+    # model="llama3-8b-8192",  # decommissioned
+    model="llama-3.1-8b-instant",
+    api_key=st.secrets["groq"]["api_key"],
     temperature=0
 )
 

@@ -29,4 +29,4 @@ __pycache__/
 # Chroma Temp Files
 *.sqlite3-shm
 *.sqlite3-wal
-secrets.toml
+.streamlit/secrets.toml
